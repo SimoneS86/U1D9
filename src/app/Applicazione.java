@@ -29,6 +29,7 @@ public class Applicazione {
 		Customer c3 = new Customer("Ajeje", 2);
 
 		// ESERCIZIO 1
+		logger.info("ESERCIZIO 1");
 		List<Product> products = Arrays.asList(p1, p2, p3, p4);
 		List<Product> expensiveBooks = products.stream()
 				.filter(b -> b.getCategory().equals("Books") && b.getPrice() > 100).toList();
@@ -36,6 +37,7 @@ public class Applicazione {
 		logger.info(expensiveBooks.toString());
 
 		// ESERCIZIO 2
+		logger.info("ESERCIZIO 2");
 		List<Product> productsOrder1 = Arrays.asList(p5, p6);
 		Order order1 = new Order("New", LocalDate.now(), LocalDate.now(), productsOrder1, c1);
 		List<Product> productsOrder2 = Arrays.asList(p7, p8);
@@ -53,17 +55,18 @@ public class Applicazione {
 		}
 
 		// ESERCIZIO 3
+		logger.info("ESERCIZIO 3");
 		List<Product> allProducts = Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8);
-		List<Product> boysProducts = allProducts.stream().filter(p -> p.getCategory().equals("Boys")).toList();
+		List<Product> boysProducts = allProducts.stream().filter(p -> p.getCategory().equals("Boys")).map(p -> {
+			p.setPrice(p.getPrice() * 0.9);
+			return p;
+		}).toList();
 
-		for (Product product : boysProducts) {
-			double discount = product.getPrice() * 0.1;
-			product.setPrice(product.getPrice() - discount);
-		}
 		logger.info("Prodotti della categoria \"Boys\" con sconto del 10% : ");
 		logger.info(boysProducts.toString());
 
 		// ESERCIZIO 4
+		logger.info("ESERCIZIO 4");
 		LocalDate startDate = LocalDate.of(2022, 2, 1);
 		LocalDate endDate = LocalDate.of(2022, 4, 1);
 		List<Product> tier2ProductsOrdered = orders.stream()
